@@ -74,8 +74,21 @@ def dashboard_view(request):
     if not access_token:
         messages.error(request, "You must be logged in to access the dashboard.")
         return redirect("login")
+
+    profile_api_url = f"{settings.API_SERVER_URL}/userprofile/users/profiles/"
+    headers = {"Authorization": f"Bearer {access_token}"}
+
+    # Fetch the user profiles
+    profile_response = requests.get(profile_api_url, headers=headers)
     
-    return render(request, "dashboard.html")
+    if profile_response.status_code == 200:
+        user_profiles = profile_response.json()
+        # Pass user profiles to the template
+        return render(request, "dashboard.html", {"user_profiles": user_profiles})
+    else:
+        messages.error(request, f"Failed to retrieve profiles. {profile_response.text}")
+        return redirect("login")
+
 
 
 def logout_view(request):
