@@ -1,52 +1,78 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Dashboard</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
 </head>
-<body>
-    <h1>User Profiles</h1>
+<body class="bg-gray-50 text-gray-900">
 
-    {% if user_profiles %}
-        <table border="1">
-            <tr>
-                <th>First Name</th>
-                <th>Last Name</th>
-                <th>Email</th>
-                <th>Address</th>
-                <th>City</th>
-                <th>Country</th>
-                <th>Phone Number</th>
-                <th>Employee ID</th>
-                <th>Hire Date</th>
-                <th>Position</th>
-                <th>Work Location</th>
-                <th>Work Mode</th>
-                <th>Emergency Contact</th>
-                <th>Education Degree</th>
-            </tr>
-            {% for profile in user_profiles %}
-            <tr>
-                <td>{{ profile.first_name  }}</td>
-                <td>{{ profile.last_name }}</td>
-                <td>{{ profile.email }}</td>
-                <td>{{ profile.address }}</td>
-                <td>{{ profile.city }}</td>
-                <td>{{ profile.country }}</td>
-                <td>{{ profile.phone_number }}</td>
-                <td>{{ profile.employee_id }}</td>
-                <td>{{ profile.hire_date }}</td>
-                <td>{{ profile.position }}</td>
-                <td>{{ profile.work_location }}</td>
-                <td>{{ profile.work_mode }}</td>
-                <td>{{ profile.emergency_contact_name }}: {{ profile.emergency_contact_phone }}</td>
-                <td>{{ profile.education_degree }}</td>
-            </tr>
-            {% endfor %}
-        </table>
-    {% else %}
-        <p>No user profiles found.</p>
-    {% endif %}
+    <!-- Navbar -->
+    <nav class="bg-blue-600 p-4">
+        <div class="max-w-7xl mx-auto flex justify-between items-center">
+            <a href="{% url 'login' %}" class="text-white font-semibold text-lg">Login</a>
+            <a href="{% url 'create_profile' %}" class="text-white font-semibold text-lg">Create Profile</a>
+            <a href="{% url 'dashboard' %}" class="text-white font-semibold text-lg">Dashboard</a>
+        </div>
+    </nav>
 
-    <a href="{% url 'logout' %}">Logout</a>
+    <!-- Dashboard Content -->
+    <div class="container mx-auto p-6">
+        <h1 class="text-3xl font-semibold mb-6">User Profiles</h1>
+
+        {% if user_profiles %}
+            <div class="overflow-x-auto bg-white shadow-md rounded-lg">
+                <table class="min-w-full table-auto">
+                    <thead class="bg-gray-200">
+                        <tr>
+                            <th class="px-4 py-2 text-left text-sm font-medium text-gray-700">First Name</th>
+                            <th class="px-4 py-2 text-left text-sm font-medium text-gray-700">Last Name</th>
+                            <th class="px-4 py-2 text-left text-sm font-medium text-gray-700">Email</th>
+                            <th class="px-4 py-2 text-left text-sm font-medium text-gray-700">Address</th>
+                            <th class="px-4 py-2 text-left text-sm font-medium text-gray-700">City</th>
+                            <th class="px-4 py-2 text-left text-sm font-medium text-gray-700">Country</th>
+                            <th class="px-4 py-2 text-left text-sm font-medium text-gray-700">Phone Number</th>
+                            <th class="px-4 py-2 text-left text-sm font-medium text-gray-700">Employee ID</th>
+                            <th class="px-4 py-2 text-left text-sm font-medium text-gray-700">Hire Date</th>
+                            <th class="px-4 py-2 text-left text-sm font-medium text-gray-700">Position</th>
+                            <th class="px-4 py-2 text-left text-sm font-medium text-gray-700">Work Location</th>
+                            <th class="px-4 py-2 text-left text-sm font-medium text-gray-700">Work Mode</th>
+                            <th class="px-4 py-2 text-left text-sm font-medium text-gray-700">Emergency Contact</th>
+                            <th class="px-4 py-2 text-left text-sm font-medium text-gray-700">Education Degree</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for profile in user_profiles %}
+                        <tr class="border-b hover:bg-gray-100">
+                            <td class="px-4 py-2 text-sm">{{ profile.first_name }}</td>
+                            <td class="px-4 py-2 text-sm">{{ profile.last_name }}</td>
+                            <td class="px-4 py-2 text-sm">{{ profile.email }}</td>
+                            <td class="px-4 py-2 text-sm">{{ profile.address }}</td>
+                            <td class="px-4 py-2 text-sm">{{ profile.city }}</td>
+                            <td class="px-4 py-2 text-sm">{{ profile.country }}</td>
+                            <td class="px-4 py-2 text-sm">{{ profile.phone_number }}</td>
+                            <td class="px-4 py-2 text-sm">{{ profile.employee_id }}</td>
+                            <td class="px-4 py-2 text-sm">{{ profile.hire_date|default:"N/A" }}</td>
+                            <td class="px-4 py-2 text-sm">{{ profile.position }}</td>
+                            <td class="px-4 py-2 text-sm">{{ profile.work_location }}</td>
+                            <td class="px-4 py-2 text-sm">{{ profile.work_mode }}</td>
+                            <td class="px-4 py-2 text-sm">{{ profile.emergency_contact_name }}: {{ profile.emergency_contact_phone }}</td>
+                            <td class="px-4 py-2 text-sm">{{ profile.education_degree }}</td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        {% else %}
+            <p class="mt-4 text-gray-600">No user profiles found.</p>
+        {% endif %}
+
+        <div class="mt-6">
+            <a href="{% url 'logout' %}" class="text-blue-500 hover:text-blue-700">Logout</a>
+        </div>
+    </div>
+
 </body>
 </html>

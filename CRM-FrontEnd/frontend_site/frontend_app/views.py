@@ -48,25 +48,39 @@ def create_profile_view(request):
         return redirect("login")
 
     if request.method == "POST":
-        # Profile creation API endpoint
-        profile_api_url = f"{settings.API_SERVER_URL}/user-profiles/"
-        headers = {"Authorization": f"Bearer {access_token}"}
+        # Collect form data
         data = {
             "first_name": request.POST.get("first_name"),
             "last_name": request.POST.get("last_name"),
             "email": request.POST.get("email"),
+            "address": request.POST.get("address"),
+            "city": request.POST.get("city"),
+            "country": request.POST.get("country"),
+            "phone_number": request.POST.get("phone_number"),
+            "employee_id": request.POST.get("employee_id"),
+            "hire_date": request.POST.get("hire_date"),
+            "position": request.POST.get("position"),
+            "work_location": request.POST.get("work_location"),
+            "work_mode": request.POST.get("work_mode"),
+            "emergency_contact_name": request.POST.get("emergency_contact_name"),
+            "emergency_contact_phone": request.POST.get("emergency_contact_phone"),
+            "education_degree": request.POST.get("education_degree"),
         }
-
-        response = requests.post(profile_api_url, headers=headers, data=data)
-
+        
+        # Make the API request to create the profile
+        response = requests.post(
+            "https://yourapi.com/profiles/",
+            headers={"Authorization": f"Bearer {access_token}"},
+            data=data,
+        )
+        
         if response.status_code == 201:
-            messages.success(request, "Profile created successfully!")
+            messages.success(request, "Profile created successfully.")
             return redirect("dashboard")
         else:
-            messages.error(request, f"Failed to create profile. {response.text}")
-
+            messages.error(request, "There was an error creating the profile.")
+    
     return render(request, "create_profile.html")
-
 
 def dashboard_view(request):
     access_token = request.session.get("access_token")

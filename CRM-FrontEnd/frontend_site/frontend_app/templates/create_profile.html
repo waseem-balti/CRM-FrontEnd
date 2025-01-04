@@ -1,22 +1,124 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Create Profile</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
 </head>
-<body>
-    <h1>Create Your Profile</h1>
-    <form method="post">
-        {% csrf_token %}
-        <label for="first_name">First Name:</label>
-        <input type="text" name="first_name" id="first_name" required><br>
-        <label for="last_name">Last Name:</label>
-        <input type="text" name="last_name" id="last_name" required><br>
-        <label for="email">Email:</label>
-        <input type="email" name="email" id="email" required><br>
-        <button type="submit">Create Profile</button>
-    </form>
-    {% for message in messages %}
-        <p>{{ message }}</p>
-    {% endfor %}
+<body class="bg-gray-100 text-gray-900">
+
+    <div class="container mx-auto p-6 max-w-3xl">
+        <h1 class="text-3xl font-semibold mb-6">Create User Profile</h1>
+
+        <form method="POST" class="bg-white p-6 rounded-lg shadow-md" action="">
+            {% csrf_token %}
+            <div class="space-y-4">
+                <!-- First Name -->
+                <div>
+                    <label for="first_name" class="block text-sm font-medium text-gray-700">First Name</label>
+                    <input type="text" name="first_name" id="first_name" required class="mt-1 block w-full p-3 border border-gray-300 rounded-md focus:ring-blue-500 focus:border-blue-500">
+                </div>
+
+                <!-- Last Name -->
+                <div>
+                    <label for="last_name" class="block text-sm font-medium text-gray-700">Last Name</label>
+                    <input type="text" name="last_name" id="last_name" required class="mt-1 block w-full p-3 border border-gray-300 rounded-md focus:ring-blue-500 focus:border-blue-500">
+                </div>
+
+                <!-- Email -->
+                <div>
+                    <label for="email" class="block text-sm font-medium text-gray-700">Email</label>
+                    <input type="email" name="email" id="email" required class="mt-1 block w-full p-3 border border-gray-300 rounded-md focus:ring-blue-500 focus:border-blue-500">
+                </div>
+
+                <!-- Address -->
+                <div>
+                    <label for="address" class="block text-sm font-medium text-gray-700">Address</label>
+                    <input type="text" name="address" id="address" class="mt-1 block w-full p-3 border border-gray-300 rounded-md focus:ring-blue-500 focus:border-blue-500">
+                </div>
+
+                <!-- City -->
+                <div>
+                    <label for="city" class="block text-sm font-medium text-gray-700">City</label>
+                    <select name="city" id="city" class="mt-1 block w-full p-3 border border-gray-300 rounded-md focus:ring-blue-500 focus:border-blue-500">
+                        <option value="Skardu">Skardu</option>
+                        <option value="Gilgit">Gilgit</option>
+                        <option value="Karachi">Karachi</option>
+                        <option value="Islamabad">Islamabad</option>
+                        <!-- Add more cities as needed -->
+                    </select>
+                </div>
+
+                <!-- Country -->
+                <div>
+                    <label for="country" class="block text-sm font-medium text-gray-700">Country</label>
+                    <input type="text" name="country" id="country" value="Pakistan" class="mt-1 block w-full p-3 border border-gray-300 rounded-md focus:ring-blue-500 focus:border-blue-500" readonly>
+                </div>
+
+                <!-- Phone Number -->
+                <div>
+                    <label for="phone_number" class="block text-sm font-medium text-gray-700">Phone Number</label>
+                    <input type="text" name="phone_number" id="phone_number" class="mt-1 block w-full p-3 border border-gray-300 rounded-md focus:ring-blue-500 focus:border-blue-500">
+                </div>
+
+                <!-- Employee ID -->
+                <div>
+                    <label for="employee_id" class="block text-sm font-medium text-gray-700">Employee ID</label>
+                    <input type="text" name="employee_id" id="employee_id" required class="mt-1 block w-full p-3 border border-gray-300 rounded-md focus:ring-blue-500 focus:border-blue-500">
+                </div>
+
+                <!-- Hire Date -->
+                <div>
+                    <label for="hire_date" class="block text-sm font-medium text-gray-700">Hire Date</label>
+                    <input type="date" name="hire_date" id="hire_date" class="mt-1 block w-full p-3 border border-gray-300 rounded-md focus:ring-blue-500 focus:border-blue-500">
+                </div>
+
+                <!-- Position -->
+                <div>
+                    <label for="position" class="block text-sm font-medium text-gray-700">Position</label>
+                    <input type="text" name="position" id="position" class="mt-1 block w-full p-3 border border-gray-300 rounded-md focus:ring-blue-500 focus:border-blue-500">
+                </div>
+
+                <!-- Work Location -->
+                <div>
+                    <label for="work_location" class="block text-sm font-medium text-gray-700">Work Location</label>
+                    <input type="text" name="work_location" id="work_location" class="mt-1 block w-full p-3 border border-gray-300 rounded-md focus:ring-blue-500 focus:border-blue-500">
+                </div>
+
+                <!-- Work Mode -->
+                <div>
+                    <label for="work_mode" class="block text-sm font-medium text-gray-700">Work Mode</label>
+                    <input type="text" name="work_mode" id="work_mode" class="mt-1 block w-full p-3 border border-gray-300 rounded-md focus:ring-blue-500 focus:border-blue-500">
+                </div>
+
+                <!-- Emergency Contact -->
+                <div>
+                    <label for="emergency_contact_name" class="block text-sm font-medium text-gray-700">Emergency Contact Name</label>
+                    <input type="text" name="emergency_contact_name" id="emergency_contact_name" class="mt-1 block w-full p-3 border border-gray-300 rounded-md focus:ring-blue-500 focus:border-blue-500">
+                </div>
+
+                <div>
+                    <label for="emergency_contact_phone" class="block text-sm font-medium text-gray-700">Emergency Contact Phone</label>
+                    <input type="text" name="emergency_contact_phone" id="emergency_contact_phone" class="mt-1 block w-full p-3 border border-gray-300 rounded-md focus:ring-blue-500 focus:border-blue-500">
+                </div>
+
+                <!-- Education Degree -->
+                <div>
+                    <label for="education_degree" class="block text-sm font-medium text-gray-700">Education Degree</label>
+                    <input type="text" name="education_degree" id="education_degree" class="mt-1 block w-full p-3 border border-gray-300 rounded-md focus:ring-blue-500 focus:border-blue-500">
+                </div>
+
+                <!-- Submit Button -->
+                <div>
+                    <button type="submit" class="w-full mt-6 p-3 bg-blue-600 text-white font-semibold rounded-md hover:bg-blue-700 focus:ring-2 focus:ring-blue-500 focus:ring-opacity-50">
+                        Create Profile
+                    </button>
+                </div>
+            </div>
+        </form>
+    </div>
+
 </body>
 </html>
